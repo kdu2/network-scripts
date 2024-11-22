@@ -1,5 +1,6 @@
 from netmiko import ConnectHandler
 from textfsm import TextFSM
+import getpass
 
 UN = input("Enter username: ")
 PW = getpass.getpass(prompt="Password: ")
@@ -13,7 +14,7 @@ with open ('Devices.txt') as routers:
             'password': PW
         }
 
-    with ConnectHandler(**Router) as ssh_session:
+    with ConnectHandler(**Router) as netconnect:
         print('-'*79)
         output = netconnect.send_command('show int status',use_textfsm=True)
         for i in output:
